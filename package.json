@@ -1,0 +1,26 @@
+{
+  "name": "aws-serverless-template",
+  "version": "0.0.0",
+  "repository": "git@github.com:lnwu/aws-serverless-template.git",
+  "author": "lnwu <wind2729@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "sls offline start",
+    "deploy": "sls deploy"
+  },
+  "dependencies": {
+    "eslint": "^5.16.0",
+    "serverless": "^1.44.1",
+    "serverless-offline": "^5.1.1",
+    "serverless-plugin-typescript": "^1.1.7",
+    "typescript": "^3.5.1"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.27",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
+  }
+}
