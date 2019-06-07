@@ -8,6 +8,7 @@ export const setLnwu = () => {
   })
 }
 
-export const getUserById = (id: string) => {
-  return id
+export const getUserById = async (id: string) => {
+  const user = await users.doc(id).get()
+  return user ? user.data() : null
 }
