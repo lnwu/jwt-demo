@@ -1,6 +1,6 @@
-import * as express from "express"
+import express from "express"
 import { getCurrentUser, updateCurrentUser } from "./routes/user"
-import * as morgan from "morgan"
+import morgan from "morgan"
 import { auth } from "./middlewares/auth"
 
 export const app = express()

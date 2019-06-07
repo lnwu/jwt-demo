@@ -1,3 +1,6 @@
 node_modules/
 .build/
 .serverless/
+
+# firebase firestore token
+token.ts
