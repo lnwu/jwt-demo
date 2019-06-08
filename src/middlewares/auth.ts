@@ -10,6 +10,6 @@ declare global {
 }
 
 export const auth = () => (req: Request, res: Response, next: NextFunction) => {
-  req.userId = "w0cBUnEQqq5qdScAJUdz"
+  req.userId = "EM9ei4VS0ViJ13WqBgAv"
   next()
 }
