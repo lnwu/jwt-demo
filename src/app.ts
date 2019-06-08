@@ -1,5 +1,5 @@
 import express from "express"
-import { getCurrentUser, updateCurrentUser, login } from "./routes/user"
+import { getCurrentUser, updateCurrentUser, login, logout } from "./routes/user"
 import morgan from "morgan"
 import cookieParser from "cookie-parser"
 import { auth } from "./middlewares/auth"
@@ -16,3 +16,4 @@ app.use("/user", auth())
 app.get("/user", getCurrentUser)
 app.put("/user", updateCurrentUser)
 app.post("/login", login)
+app.post("/logout", logout)
