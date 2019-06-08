@@ -1,2 +1,1 @@
-# aws-serverless-template
-Template for aws serverless
+# auth-demo-api

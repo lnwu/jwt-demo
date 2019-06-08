@@ -1,4 +1,4 @@
-service: aws-serverless-template
+service: auth-demo-api
 
 provider:
   name: aws
