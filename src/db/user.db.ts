@@ -19,3 +19,19 @@ export const getUserById = async (id: string) => {
   const user = await users.doc(id).get()
   return user ? user.data() : null
 }
+
+export const getUserIdByEmailAndPassword = async (
+  email: string,
+  password: string
+) => {
+  const user = users
+    .where("email", "==", email)
+    .where("password", "==", password)
+    .get()
+  if (!(await user).empty) {
+    const matchedUser = (await user).docs[0]
+    return matchedUser.id
+  } else {
+    return null
+  }
+}

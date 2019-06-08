@@ -10,6 +10,11 @@ declare global {
 }
 
 export const auth = () => (req: Request, res: Response, next: NextFunction) => {
-  req.userId = "EM9ei4VS0ViJ13WqBgAv"
-  next()
+  const authCookie = req.cookies.auth
+  if (authCookie) {
+    req.userId = authCookie
+    next()
+  } else {
+    res.status(401).send({ message: "UNAUTHORIZED" })
+  }
 }
