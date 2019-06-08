@@ -20,6 +20,11 @@ export const getUserById = async (id: string) => {
   return user ? user.data() : null
 }
 
+export const updateUserById = async (id: string, userData: object) => {
+  await users.doc(id).update(userData)
+  return getUserById(id)
+}
+
 export const getUserIdByEmailAndPassword = async (
   email: string,
   password: string

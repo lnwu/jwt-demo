@@ -1,5 +1,9 @@
 import { Request, Response } from "express"
-import { getUserById, getUserIdByEmailAndPassword } from "../db/user.db"
+import {
+  getUserById,
+  getUserIdByEmailAndPassword,
+  updateUserById
+} from "../db/user.db"
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body
@@ -21,11 +25,8 @@ export const logout = async (req: Request, res: Response) => {
   res.send({ message: "Logout succeed!" })
 }
 
-export const getCurrentUser = async (req: Request, res: Response) => {
-  const user = await getUserById(req.userId)
-  return res.send(user)
-}
+export const getCurrentUser = async (req: Request, res: Response) =>
+  res.send(await getUserById(req.userId))
 
-export const updateCurrentUser = async (req: Request, res: Response) => {
-  return res.send("user")
-}
+export const updateCurrentUser = async (req: Request, res: Response) =>
+  res.send(await updateUserById(req.userId, req.body))
