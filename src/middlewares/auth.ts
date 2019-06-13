@@ -2,7 +2,6 @@
 import { Request, Response, NextFunction } from "express"
 import { createVerify } from "crypto"
 import { readFileSync } from "fs"
-import base64url from "base64url"
 import { ALG } from "../routes/user"
 
 declare global {
@@ -18,15 +17,14 @@ const publicKey = readFileSync("/Users/lnwu/Dev/test/public.pem", "utf8")
 export const auth = () => (req: Request, res: Response, next: NextFunction) => {
   const authCookie = req.cookies.auth as string
   if (authCookie) {
-    const verify = createVerify(ALG)
-    const [header, payload, signature] = authCookie.split(".")
-
-    verify.update(`${header}.${payload}`)
-
-    const verifyResult = verify.verify(publicKey, signature, "hex")
-    if (verifyResult) {
-      const payloadObject = JSON.parse(base64url.decode(payload))
-      req.userId = payloadObject.sub
+    const [payload, signature] = authCookie.split(".")
+    const verifyResult = createVerify(ALG)
+      .update(payload)
+      .verify(publicKey, signature, "hex")
+    const payloadObject = JSON.parse(payload)
+    const isExpired = payloadObject.expire < Date.now()
+    if (verifyResult && !isExpired) {
+      req.userId = payloadObject.userId
       next()
     } else {
       res.status(401).send({ message: "UNAUTHORIZED" })

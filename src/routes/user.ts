@@ -6,7 +6,6 @@ import {
 } from "../db/user.db"
 import { createSign } from "crypto"
 import { readFileSync } from "fs"
-import base64url from "base64url"
 
 const privateKey = readFileSync("/Users/lnwu/Dev/test/private.pem", "utf8")
 export const ALG = "SHA256"
@@ -19,26 +18,18 @@ export const login = async (req: Request, res: Response) => {
 
   const userId = await getUserIdByEmailAndPassword(email, password)
   if (userId) {
-    const jwtHeader = base64url(
-      JSON.stringify({
-        alg: ALG,
-        typ: "JWT"
-      })
-    )
+    const payload = JSON.stringify({
+      userId,
+      expire: Date.now() + 1000 * 10
+    })
 
-    const jwtPayload = base64url(
-      JSON.stringify({
-        sub: userId
-      })
-    )
-
-    const jwtSignature = createSign(ALG)
-      .update(jwtHeader + "." + jwtPayload)
+    const signedPayload = createSign(ALG)
+      .update(payload)
       .sign(privateKey, "hex")
 
-    const idToken = `${jwtHeader}.${jwtPayload}.${jwtSignature}`
+    const idToken = `${payload}.${signedPayload}`
 
-    res.cookie("auth", idToken, { httpOnly: true })
+    res.cookie("auth", idToken, { httpOnly: true, maxAge: 1000 * 60 })
     res.send({ message: "Login succeed!" })
   } else {
     res.status(401).send({ message: "Email/password is wrong!" })
