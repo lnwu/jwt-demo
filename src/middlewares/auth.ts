@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { Request, Response, NextFunction } from "express"
-import { createVerify } from "crypto"
 import { readFileSync } from "fs"
-import base64url from "base64url"
-import { ALG } from "../routes/user"
+import jwt from "jsonwebtoken"
 
 declare global {
   namespace Express {
@@ -17,21 +15,15 @@ const publicKey = readFileSync("/Users/lnwu/Dev/test/public.pem", "utf8")
 
 export const auth = () => (req: Request, res: Response, next: NextFunction) => {
   const authCookie = req.cookies.auth as string
-  if (authCookie) {
-    const [header, payload, signature] = authCookie.split(".")
-    const verifyResult = createVerify(ALG)
-      .update(`${header}.${payload}`)
-      .verify(publicKey, signature, "hex")
-
-    const payloadObject = JSON.parse(base64url.decode(payload))
-    const isExpired = payloadObject.exp < Date.now()
-    if (verifyResult && !isExpired) {
-      req.userId = payloadObject.sub
+  try {
+    const verifyResult = jwt.verify(authCookie, publicKey) as any
+    if (verifyResult) {
+      req.userId = verifyResult.sub
       next()
     } else {
       res.status(401).send({ message: "UNAUTHORIZED" })
     }
-  } else {
-    res.status(401).send({ message: "UNAUTHORIZED" })
+  } catch (error) {
+    res.status(401).send({ message: error })
   }
 }
