@@ -5,7 +5,7 @@
   "author": "lnwu <wind2729@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node --inspect ./node_modules/.bin/serverless offline start",
+    "start": "sls offline start",
     "deploy": "sls deploy"
   },
   "dependencies": {
