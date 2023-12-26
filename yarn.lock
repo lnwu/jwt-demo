@@ -527,14 +527,14 @@
     write-file-atomic "^2.4.2"
 
 "@types/aws-lambda@*", "@types/aws-lambda@^8.10.27":
-  version "8.10.27"
-  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.27.tgz#33366bb26d8fb116f414e7c1855df5a0b6aa1d3d"
-  integrity sha512-9QjcjORRtgG5KPVHWqGZ0F2Uo/ALUWQ5D7qfJEco0fEjoSbA908w05RXql7YPS72jQ1w6I+pr+8pQPqBPlYnSw==
+  version "8.10.130"
+  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.130.tgz#d4a44201f0e47c8320a5868d845ad654f3b4adc2"
+  integrity sha512-HxTfLeGvD1wTJqIGwcBCpNmHKenja+We1e0cuzeIDFfbEj3ixnlTInyPR/81zAe0Ss/Ip12rFK6XNeMLVucOSg==
 
 "@types/aws-serverless-express@^3.3.1":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@types/aws-serverless-express/-/aws-serverless-express-3.3.1.tgz#ead2a72589e39e1d4e7a06b766117fa5772d30ed"
-  integrity sha512-jxDCw/DW/p7Mebn0QP2/f4lUlLWRqizpribrOGdUdAfWY04pdmNesEWNXHZm8Ch4ljXS12tjbnnqVn+szlI+Pw==
+  version "3.3.9"
+  resolved "https://registry.yarnpkg.com/@types/aws-serverless-express/-/aws-serverless-express-3.3.9.tgz#a1c4806b6739f4b3597813590ff884981c09f2c1"
+  integrity sha512-6LOGAaO1QisUeujn95KLHX7Owlv+ZXmbL3i8TkRFOD4FjzTd8XF7osjsGK52MvposbO2yWuzm9U7v19x8cXsYQ==
   dependencies:
     "@types/aws-lambda" "*"
     "@types/express" "*"
